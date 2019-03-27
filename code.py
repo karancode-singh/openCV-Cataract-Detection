@@ -14,6 +14,15 @@ image = cv2.imread("images/"+filename, cv2.IMREAD_COLOR)
 print("\n\n",filename)
 image = cv2.medianBlur(image,3)
 
+print(image.shape)
+width, height = image.shape[:2]
+aspectRatio = width/height
+newHeight = 480
+newWidth = int(aspectRatio*newHeight)
+dim = (newHeight,newWidth)
+image = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
+print(image.shape)
+
 # selectOnImage_copy = image.copy()
 # marker_image = np.zeros(image.shape[:2],dtype=np.int32)
 # segments = np.zeros(image.shape,dtype=np.uint8)
@@ -64,9 +73,9 @@ image = cv2.medianBlur(image,3)
 image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 image = cv2.equalizeHist(image)
 seg = cv2.imread("images/seg"+filename, cv2.IMREAD_GRAYSCALE)
-# cv2.imshow('detected circle (pupil)',image)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+# # cv2.imshow('detected circle (pupil)',image)
+# # cv2.waitKey(0)
+# # cv2.destroyAllWindows()
 
 npixels = 0
 intensitySum = 0
